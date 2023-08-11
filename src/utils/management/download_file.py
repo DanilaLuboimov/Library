@@ -6,6 +6,8 @@ def download_file(url: str, filename: str) -> str:
     path = os.path.abspath(
         os.path.join(__file__, "../../files"))
 
+    os.makedirs(os.path.dirname(os.path.join(path, "book.json")), exist_ok=True)
+    
     with open(os.path.join(path, filename), "wb") as file:
         with requests.get(url, stream=True) as r:
 
