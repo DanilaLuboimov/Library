@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+</head>
+<body>
+
+{#Контент на странице#}
+
+{% block content %}
+
+{#    Карточка книги#}
+
+    <div class="d-flex flex-wrap" id="book">
+    </div>
+
+{#    Карточка книги#}
+
+{#    Дополнительные файлы#}
+
+    <script src="{% static 'js/book_detail.js' %}" type="module"></script>
+
+{#    Дополнительные файлы#}
+
+{% endblock %}
+
+{#Контент на странице#}
+</body>
+</html>

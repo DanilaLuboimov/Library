@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon"
+          href="{% static 'img/icon.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{#Переменные для Jinja#}
+{% url 'main' as main_url %}
+{% url 'categories' as categories_url %}
+{% url 'profile' as profile_url %}
+{#Переменные для Jinja#}
+
+{#Переменные для JS#}
+{{ request.user.id | json_script:'user_id' }}
+{{ request.user.username | json_script:'profile_user' }}
+{#Переменные для JS#}
+
+{#Навигация#}
+<nav class="navbar navbar-expand-xl navbar-light"
+     style="background-color: #5f9ea0">
+    <div class="container-sm">
+        <a class="navbar-brand" href="{% url 'main' %}"><img src="
+{% static 'img/icon.png' %}" alt="icon" width="50" height="50"></a>
+        <div class="container-sm">
+            <ul class="navbar-nav justify-content-left fs-3">
+                <li class="nav-item">
+                    <a class="nav-link" href=
+                            "{% url 'categories' %}">Каталог</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false" data-bs-auto-close="outside">
+                        Категории
+                    </a>
+                    <ul class="dropdown-menu bg-secondary p-1 bg-opacity-75"
+                        style="border: 1px solid black"
+                        id="category_drop_menu"
+                        aria-labelledby="navbarDropdownMenuLink">
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="container-sm">
+            <ul class="navbar-nav justify-content-end fs-3">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-current="page" href=
+                                "#" id="profile"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}?next={{ request.path|urlencode }}">Выход</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modal_login_form">
+                            Вход
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{#Навигация#}
+
+{#Контент на странице#}
+<div class="container-lg">
+    {% block content %}
+    {% endblock %}
+</div>
+{#Контент на странице#}
+
+{#Футер сайта#}
+<footer class="footer navbar navbar-expand-xl navbar-light menu">
+    <div class="container-sm">
+        <ul class="navbar-nav justify-content-left fs-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'feedback' %}"
+                           data-bs-toggle="modal"
+                           data-bs-target="#modal_feedback_form">
+                            Обратная связь
+                    </a>
+                </li>
+        </ul>
+    </div>
+</footer>
+{#Футер сайта#}
+
+{#Дополнительные файлы#}
+{% include 'user/modal_login.html' %}
+{% include 'user/modal_feedback.html' %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous"></script>
+
+<script src="{% static 'js/main.js' %}" type="module"></script>
+<script src="{% static 'js/categories.js' %}" type="module"></script>
+<script src="{% static 'js/login.js' %}" type="module"></script>
+<script src="{% static 'js/feedback.js' %}" type="module"></script>
+{#Дополнительные файлы#}
+
+</body>
+</html>

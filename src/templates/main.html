@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная страница{% endblock %}</title>
+    {% load static %}
+</head>
+<body>
+{% block content %}
+<div class="d-flex flex-wrap justify-content-center mt-5">
+    <h1>Добро пожаловать{% if request.user.is_authenticated %},
+        {{ request.user.username }}{% endif %}!</h1>
+</div>
+{% endblock %}
+</body>
+
+
+</html>

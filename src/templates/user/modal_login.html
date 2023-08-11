@@ -1,0 +1,28 @@
+<div class="modal fade" id="modal_login_form" tabindex="-1"
+     aria-labelledby="login_form" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Вход</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        style="outline: none;box-shadow: none"
+                        aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger d-none" id="danger_login"
+                 role="alert"></div>
+            <form action="{% url 'login' %}" method="POST" id="form_ajax">
+                <div class="modal-body">
+
+                    {{ login_form }}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            class="btn menu btn-lg btn-outline-dark">
+                        Вход
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

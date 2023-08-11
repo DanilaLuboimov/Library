@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Каталог{% endblock %}</title>
+    {% load static %}
+</head>
+<body>
+{% block content %}
+{#    Фильтры и кнопки поиска #}
+    <div class="mt-2 d-flex justify-content-between">
+        <button class="btn btn-lg menu btn-outline-dark" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFilters" aria-expanded="false"
+                aria-controls="collapseFilters">
+            Фильтры
+        </button>
+        <button class="btn btn-lg menu btn-outline-dark ms-3" type="button"
+            id="search_start">Поиск</button>
+    </div>
+    <div class="collapse ms-5 mt-3 me-5" id="collapseFilters" >
+        <button class="btn menu btn-outline-dark" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseBooks" aria-expanded="false"
+                aria-controls="collapseTags">
+            Названию книги
+        </button>
+        <div class="collapse mt-3" id="collapseBooks">
+            <label for="input_book"
+                   class="form-label">Впишите название книги</label>
+            <textarea class="form-control" id="input_book"
+                      rows="1"></textarea>
+        </div>
+        <br>
+        <button class="btn menu btn-outline-dark mt-3" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseAuthor" aria-expanded="false"
+                aria-controls="collapsePrice">
+            Автор
+        </button>
+        <div class="collapse mt-3" id="collapseAuthor">
+            <label for="input_author"
+                   class="form-label">Впишите автора</label>
+            <textarea class="form-control" id="input_author"
+                      rows="1"></textarea>
+        </div>
+        <br>
+        <button class="btn menu btn-outline-dark mt-3" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseStatus" aria-expanded="false"
+                aria-controls="collapseStatus">
+            Выпуск
+        </button>
+        <div class="collapse mt-3" id="collapseStatus">
+            <input type="text" hidden="hidden" id="status">
+            <input type="radio" class="btn-check" name="options" id="option1"
+                   autocomplete="on" value="Null" checked
+            onchange="document.getElementById('status').value = this.value">
+            <label class="btn menu btn-outline-dark mt-3"
+                   for="option1">Неважно</label>
+
+            <input type="radio" class="btn-check" name="options"
+                   id="option2" autocomplete="off" value="PUBLISH"
+            onchange="document.getElementById('status').value = this.value">
+            <label class="btn menu btn-outline-dark mt-3"
+                   for="option2">Выпущена</label>
+
+            <input type="radio" class="btn-check" name="options"
+                   id="option3" autocomplete="off" value="MEAP"
+            onchange="document.getElementById('status').value = this.value">
+            <label class="btn menu btn-outline-dark mt-3"
+                   for="option3">Не выпущена</label>
+        </div>
+    </div>
+    <hr>
+{#    Фильтры и кнопки поиска #}
+
+{#    Карточки товаров  #}
+    <div class="row align-items-end" id="books_cards">
+    </div>
+{#    Карточки товаров  #}
+
+{#    Пагинация  #}
+    <nav class="d-flex justify-content-center" aria-label="Навигация по
+    страницам">
+        <ul class="pagination" id="pagination_ul">
+        </ul>
+    </nav>
+{#    Пагинация  #}
+
+    <script src="{% static 'js/book_catalog.js' %}" type="module"></script>
+{% endblock %}
+</body>
+</html>

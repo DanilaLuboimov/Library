@@ -1,0 +1,34 @@
+.menu {
+    background-color: #5f9ea0;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 152px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 76px;
+}
+
+.dropdown-menu {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.btn-check:active+.btn-outline-secondary, .btn-check:checked+.btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+    color: #000000;
+    background-color: #5f9ea0;
+    border-color: #000000;
+}

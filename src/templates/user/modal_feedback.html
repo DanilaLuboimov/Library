@@ -1,0 +1,31 @@
+<div class="modal fade" id="modal_feedback_form" tabindex="-1"
+     aria-labelledby="feedback_form" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Обратная связь</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        style="outline: none;box-shadow: none"
+                        aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger d-none" id="danger_feedback"
+                 role="alert"></div>
+            <div class="alert alert-success d-none" id="success_feedback"
+                 role="alert"></div>
+            <form action="{% url 'feedback' %}" method="POST"
+                  id="form_feedback_ajax">
+                <div class="modal-body">
+
+                    {{ feedback_form }}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            class="btn menu btn-lg btn-outline-dark">
+                        Отправить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
