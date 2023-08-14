@@ -79,6 +79,11 @@ class Category(models.Model):
         verbose_name="Категория",
     )
 
+    def save(self, *args, **kwargs):
+        if self.category[0].islower():
+            self.category = self.category[0].upper() + self.category[1:]
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"

@@ -1,4 +1,5 @@
 from django.db.models import Q, Prefetch
+from django.db.models.functions import Lower
 from rest_framework import generics
 from rest_framework.response import Response
 
@@ -9,7 +10,7 @@ from .serializers import CategoriesSerializer, BookSerializer
 
 class CategoriesSearchAPI(generics.ListAPIView):
     serializer_class = CategoriesSerializer
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by(Lower("category"))
 
 
 class BookCatalogAPI(generics.ListAPIView):

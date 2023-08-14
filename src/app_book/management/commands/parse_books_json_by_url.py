@@ -2,10 +2,10 @@ import json
 import os
 import sys
 
+from datetime import datetime
+
 from django.core.files import File
 from django.core.management import BaseCommand
-
-from datetime import datetime
 
 from app_book.models import Book, Author, Category
 from utils.management.download_file import download_file
@@ -124,7 +124,7 @@ class Command(BaseCommand):
                 continue
 
             category: Category = Category.objects.filter(
-                category=name
+                category__icontains=name
             ).first()
 
             if category is None:
