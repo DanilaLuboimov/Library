@@ -1,5 +1,5 @@
 async function getCategories() {
-    const request = await fetch(`http://${window.location.hostname}:8000/api/v1/book/categories`);
+    const request = await fetch(`http://${window.location.hostname}:${window.location.port}/api/v1/book/categories`);
     const categories = await request.json();
 
     categories.forEach(category => CategoriesToHTML(category))
@@ -15,7 +15,7 @@ function CategoriesToHTML({
         <li style="border-width: medium">
             <div class="btn-group dropend d-flex justify-content-between mb-1">
                 <a class="dropdown-item btn menu btn-lg"
-                    href="http://${window.location.hostname}:8000/book/catalog/?category=${category}" 
+                    href="http://${window.location.hostname}:${window.location.port}/book/catalog/?category=${category}" 
                     type="button">${category}</a>
                 <ul class="dropdown-menu bg-secondary p-1 bg-opacity-75 ms-1" id="${category}"
                         style="border: 1px solid black">                    

@@ -37,7 +37,7 @@ function getSearchBooks(query_params = window.location.search) {
 
     $.ajax({
         type: "GET",
-        url: `http://${window.location.hostname}:8000/api/v1/book/catalog/${query_params}`,
+        url: `http://${window.location.hostname}:${window.location.port}/api/v1/book/catalog/${query_params}`,
         dataType: "json",
         success: function (data) {
             let books_cards = $("#books_cards").empty()
@@ -125,7 +125,7 @@ function getSearchBooks(query_params = window.location.search) {
             }
 
             for (let page = data["page"] + 1; page <= data["total_page"] &&
-                page < data['page'] + 5;
+                page < data['page'] + 6;
                  ++page) {
                 pagination_ul.append(`
                     <li class="page-item" id="page_${page}" >
@@ -208,7 +208,7 @@ function BooksToHTML({
     }
 
     if (!jacket){
-        jacket = "http://127.0.0.1:8000/static/img/unknown_book.png"
+        jacket = `http://${window.location.hostname}:${window.location.port}/static/img/unknown_book.png`
     }
 
     if (!short_description){
@@ -226,14 +226,14 @@ function BooksToHTML({
             <div class="card" id="good_${id}">
                 <a class="d-flex justify-content-center"
                         style="height: 200px; padding: 20px; align-items: center; justify-content: center"  id="img_${id}"
-                        href="http://${window.location.hostname}:8000/book/${id}">
+                        href="http://${window.location.hostname}:${window.location.port}/book/${id}">
                     <img src="${jacket}" 
                      alt="Превью" style="max-width: 100%; max-height: 100%;">
                 </a>                
                 <div class="card-body">                    
                         <h5 class="product-title card-title" style="white-space: nowrap; overflow: hidden;
                          text-overflow: ellipsis; transform: rotate(0);">${title}
-                            <a href="http://${window.location.hostname}:8000/book/${id}"
+                            <a href="http://${window.location.hostname}:${window.location.port}/book/${id}"
                             class="stretched-link"></a>
                          </h5>
                         <p class="card-text" style="height: 55px; overflow: hidden;
@@ -261,7 +261,7 @@ function BooksToHTML({
                 </div>
                 <div class="card-body d-flex justify-content-between mt-5">
                     <p>ISBN: ${isbn}</p>
-                    <a href="http://${window.location.hostname}:8000/book/${id}" 
+                    <a href="http://${window.location.hostname}:${window.location.port}/book/${id}" 
                         class="btn menu btn-outline-dark">ТЫК</a>
                 </div>
             </div>

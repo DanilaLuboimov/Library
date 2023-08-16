@@ -1,5 +1,5 @@
 async function getBook(book_id) {
-    const res_book = await fetch(`http://${window.location.hostname}:8000/api/v1/book/book_for_detail/${book_id}/`);
+    const res_book = await fetch(`http://${window.location.hostname}:${window.location.port}/api/v1/book/book_for_detail/${book_id}/`);
     const book = await res_book.json();
 
     BookToHTML(book);
@@ -33,7 +33,7 @@ function BookToHTML({
     }
 
     if (!jacket){
-        jacket = "http://127.0.0.1:8000/static/img/unknown_book.png"
+        jacket = `http://${window.location.hostname}:${window.location.port}/static/img/unknown_book.png`
     }
 
     if (!long_description){
@@ -48,7 +48,7 @@ function BookToHTML({
     let urlCategories = categories_list.map(category => {
         return {
             name: category,
-            url: `http://${window.location.hostname}:8000/book/catalog/?category=${category}`
+            url: `http://${window.location.hostname}:${window.location.port}/book/catalog/?category=${category}`
         };
     });
 
@@ -61,7 +61,6 @@ function BookToHTML({
     }
 
     clickableCategories = clickableCategories.join(", ")
-    console.log(clickableCategories)
 
     book_card.insertAdjacentHTML('beforeend',`
         <div class="row justify-content-between p-5 clearfix ">
@@ -128,4 +127,3 @@ if (url[url.length - 1] === '') {
 }
 
 getBook(url).then()
-
